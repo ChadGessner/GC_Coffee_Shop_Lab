@@ -1,0 +1,81 @@
+﻿@model IEnumerable<ProductViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    
+}
+
+
+    
+<div class=" row align-items-center justify-content-center mt-xl-5 mb-xl-2">
+    <a class="btn btn alert-primary w-75" asp-action="Create">Create New</a>
+</div>
+<hr />
+    
+
+
+
+
+<table class="table">
+    <thead>
+        <tr class="alert-primary" >
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody class="shadow ">
+@foreach (var item in Model) {
+        <tr class="@(item.Id % 2 == 0 ? "alert-success" : "alert-dark") " >
+            
+            <td class="" >
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                <a asp-action="CategoryList" onclick=@(ViewBag.item=item.Category) asp-route-id=@item.Id class="btn btn-primary">ViewByCategory</a>
+                <a asp-action="Edit" asp-route-id=@item.Id class="btn btn alert-primary ">Edit</a> 
+                <a asp-action="Details" asp-route-id=@item.Id class="btn btn-success mt-1 mb-1">Details</a> 
+                <a asp-action="Delete" asp-route-id=@item.Id class="btn btn-danger">Delete</a> 
+
+            </td>
+            <td>
+                
+                <img height="150px" width="150px" src=@item.ImageUrl>
+            </td>
+            <td>
+                @($"{item.Price:c}")
+            </td>
+            
+            
+        </tr>
+}
+    </tbody>
+</table>
+<hr />
